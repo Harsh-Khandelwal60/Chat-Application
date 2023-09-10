@@ -23,6 +23,11 @@ const Register = () => {
     draggable: true,
     theme: "dark",
   };
+  useEffect(() => {
+    if(localStorage.getItem('chat-app-user')){
+      Navigate('/');
+    }
+  },[]);
 
   const handleValidation = () => {
     const { password, confirmPassword, username, email } = values;
