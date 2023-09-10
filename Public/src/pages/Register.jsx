@@ -4,8 +4,11 @@ import { ToastContainer, toast } from "react-toastify";
 import styled from  "styled-components";
 import "react-toastify/dist/ReactToastify.css";
 import Logo from "../assets/logo.svg";
+import axios from 'axios';
+import { registerRoute } from "../utils/APIRoutes";
 
 const Register = () => {
+  const Navigate = useNavigate('/');
 
   const [values , setValues] = useState({
     username: "",
@@ -41,9 +44,19 @@ const Register = () => {
     return true;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    handleValidation()
+    if(handleValidation()){
+      const { password, confirmPassword, username, email } = values;
+      const {data} = await axios.post(registerRoute , {username ,email , password });
+      if(data.status === false){
+        toast.error(data.message, toastOptions);
+      }
+      if(data.status === true){
+        localStorage.setItem('chat-app-user', JSON.stringify(data.user));
+        Navigate('/');
+      }
+    }
   }
   const handleChange = (event) => {
     setValues({
