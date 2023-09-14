@@ -33,7 +33,6 @@ const Login = () => {
     if (password === "") {
       toast.error("Email and password is required",toastOptions);
       return false;
-    
     } else if (username.length === "") {
       toast.error("Email and password is required",toastOptions);
       return false;
