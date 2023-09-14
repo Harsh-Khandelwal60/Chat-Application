@@ -42,6 +42,7 @@ const SetAvatar = () => {
         })
         console.log(data);
         if(data.isSet) {
+          console.log(`hi`);
             user.isAvatarImageSet = true;
             user.avatarImage=data.image;
             localStorage.setItem("chat-app-user",JSON.stringify(user));
